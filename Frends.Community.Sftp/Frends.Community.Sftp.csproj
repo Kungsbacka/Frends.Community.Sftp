@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	<TargetFrameworks>netstandard2.0;net471</TargetFrameworks>
+    <authors>HiQ Finland</authors>
+    <copyright>HiQ Finland</copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/CommunityHiQ/Frends.Community.Sftp</PackageProjectUrl>
+    <IncludeSource>true</IncludeSource>
+    <PackageTags>Frends</PackageTags>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <Version>1.0.0</Version>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="FrendsTaskMetadata.json" Pack="true" PackagePath="/">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.9" />
+    <PackageReference Include="SSH.NET" Version="2016.1.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+    <_Parameter1>Frends.Community.Sftp.Tests</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+</Project>
+
