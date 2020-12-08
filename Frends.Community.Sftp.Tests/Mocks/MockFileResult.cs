@@ -1,4 +1,6 @@
-﻿namespace Frends.Community.Sftp.Tests.Mocks
+﻿using System;
+
+namespace Frends.Community.Sftp.Tests.Mocks
 {
     internal class MockFileResult : IFileResult
     {
@@ -7,5 +9,7 @@
         public bool IsFile { get; set; }
         public long Length { get; set; }
         public string Name { get; set; }
+        public DateTime LastWriteTimeUtc { get; set; }
+        public DateTime LastAccessTimeUtc { get; set; }
     }
 }

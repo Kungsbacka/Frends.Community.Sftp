@@ -1,5 +1,7 @@
 ﻿#pragma warning disable 1591
 
+using System;
+
 namespace Frends.Community.Sftp
 {
     public interface IFileResult
@@ -16,5 +18,11 @@ namespace Frends.Community.Sftp
         /// </summary>
         long Length { get; }
         string Name { get; }
+
+        /// <summary>
+        /// Timestamps
+        /// </summary>
+        DateTime LastWriteTimeUtc { get; }
+        DateTime LastAccessTimeUtc { get; }
     }
 }

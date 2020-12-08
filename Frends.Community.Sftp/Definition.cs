@@ -1,5 +1,6 @@
 ﻿#pragma warning disable 1591
 
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Renci.SshNet.Sftp;
@@ -98,6 +99,12 @@ namespace Frends.Community.Sftp
         public long Length { get; }
         public string Name { get; }
 
+        /// <summary>
+        /// Timestamps
+        /// </summary>
+        public DateTime LastWriteTimeUtc { get; }
+        public DateTime LastAccessTimeUtc { get; }
+
         public FileResult(SftpFile file)
         {
             this.FullPath = file.FullName;
@@ -105,6 +112,8 @@ namespace Frends.Community.Sftp
             this.IsFile = file.IsRegularFile;
             this.Length = file.Length;
             this.Name = file.Name;
+            this.LastWriteTimeUtc = file.LastWriteTimeUtc;
+            this.LastAccessTimeUtc = file.LastAccessTimeUtc;
         }
     }
 }
