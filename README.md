@@ -52,10 +52,10 @@ Result is a list of objects with following parameters.
 | IsFile | `bool` | Value indicating whether file representing a file. | `true` |
 | Length | `long` | File size in bytes. | `12345` |
 | Name | `string` | Name of directory or file. | `image01.jpg` |
-| LastAccessTimeUtc | `DateTime` | DateTime in UTC for the last time file/directory was accessed. | |
-| LastWriteTimeUtc | `DateTime` | DateTime in UTC for the last time file/directory was written to. | |
-| LastAccessTime | `DateTime` | DateTime for the last time file/directory was accessed. | |
-| LastWriteTime | `DateTime` | DateTime for the last time file/directory was written to. | |
+| LastAccessTimeUtc | `DateTime` | DateTime in UTC time for the last time file/directory was accessed. | |
+| LastWriteTimeUtc | `DateTime` | DateTime in UTC time for the last time file/directory was written to. | |
+| LastAccessTime | `DateTime` | DateTime in local time for the last time file/directory was accessed. | |
+| LastWriteTime | `DateTime` | DateTime in local time for the last time file/directory was written to. | |
 
 # Building
 
