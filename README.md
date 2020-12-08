@@ -20,7 +20,7 @@ https://www.myget.org/F/frends-community/api/v3/index.json and in Gallery view i
 
 ## ListDirectory
 
-Gets directory listing from SFTP server.
+Gets directory and file listing from a SFTP server.
 
 ### Parameters
 
@@ -52,6 +52,10 @@ Result is a list of objects with following parameters.
 | IsFile | `bool` | Value indicating whether file representing a file. | `true` |
 | Length | `long` | File size in bytes. | `12345` |
 | Name | `string` | Name of directory or file. | `image01.jpg` |
+| LastAccessTimeUtc | `DateTime` | DateTime in UTC time for the last time file/directory was accessed. | |
+| LastWriteTimeUtc | `DateTime` | DateTime in UTC time for the last time file/directory was written to. | |
+| LastAccessTime | `DateTime` | DateTime in local time for the last time file/directory was accessed. | |
+| LastWriteTime | `DateTime` | DateTime in local time for the last time file/directory was written to. | |
 
 # Building
 
@@ -86,4 +90,5 @@ NOTE: Be sure to merge the latest from "upstream" before making a pull request!
 
 | Version | Changes |
 | ------- | ------- |
-| 1.0.0   | First version |
+| 1.0.0   | The initial version. |
+| 1.1.0   | DateTimes added to the result objects. |
