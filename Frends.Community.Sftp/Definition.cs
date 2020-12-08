@@ -47,7 +47,7 @@ namespace Frends.Community.Sftp
         public string Password { get; set; }
 
         /// <summary>
-        /// Directory on the server
+        /// Directory on the server.
         /// </summary>
         [DefaultValue("/")]
         [DisplayFormat(DataFormatString = "Text")]
@@ -60,7 +60,7 @@ namespace Frends.Community.Sftp
     public class Options
     {
         /// <summary>
-        /// Types to include in the directory listing
+        /// Types to include in the directory listing.
         /// </summary>
         [DefaultValue(IncludeType.File)]
         public IncludeType IncludeType { get; set; } = IncludeType.File;
@@ -72,13 +72,13 @@ namespace Frends.Community.Sftp
         public string FileMask { get; set; }
 
         /// <summary>
-        /// Full path to private key file
+        /// Full path to private key file.
         /// </summary>
         [DisplayFormat(DataFormatString = "Text")]
         public string PrivateKeyFileName { get; set; }
 
         /// <summary>
-        /// Passphrase for the private key file
+        /// Passphrase for the private key file.
         /// </summary>
         [PasswordPropertyText]
         public string Passphrase { get; set; }
@@ -87,20 +87,20 @@ namespace Frends.Community.Sftp
     public class FileResult : IFileResult
     {
         /// <summary>
-        /// Full path of directory or file
+        /// Full path of directory or file.
         /// </summary>
         public string FullPath { get; }
         public bool IsDirectory { get; }
         public bool IsFile { get; }
 
         /// <summary>
-        /// File size in bytes
+        /// File size in bytes.
         /// </summary>
         public long Length { get; }
         public string Name { get; }
 
         /// <summary>
-        /// Timestamps
+        /// Timestamps for last access and write in both UTC and current timezone.
         /// </summary>
         public DateTime LastWriteTimeUtc { get; }
         public DateTime LastAccessTimeUtc { get; }
