@@ -33,7 +33,7 @@ namespace Frends.Community.Sftp.Tests
         }
 
         [TestCase(null, IncludeType.Both, new[] { "11/16/2020 12:00:00", "11/16/2020 13:01:00", "11/16/2020 17:00:11", "11/16/2020 22:00:00", "11/16/2020 23:00:00" })]
-        public void GetDirectoryListLWTs(string fileMask, IncludeType includeType, IEnumerable<string> expectedLWTs)
+        public void GetDirectoryListUTCLWTs(string fileMask, IncludeType includeType, IEnumerable<string> expectedLWTs)
         {
             var options = new Options { FileMask = fileMask, IncludeType = includeType };
             var result = CreateSftpTaskInstance().ListDirectoryInternal(_dummyParams, options, new System.Threading.CancellationToken());
@@ -42,12 +42,30 @@ namespace Frends.Community.Sftp.Tests
         }
 
         [TestCase(null, IncludeType.Both, new[] { "12/08/2020 11:00:00", "12/08/2020 12:00:00", "12/08/2020 13:00:00", "12/08/2020 14:00:00", "12/08/2020 15:00:00" })]
-        public void GetDirectoryListLATs(string fileMask, IncludeType includeType, IEnumerable<string> expectedLATs)
+        public void GetDirectoryListUTCLATs(string fileMask, IncludeType includeType, IEnumerable<string> expectedLATs)
         {
             var options = new Options { FileMask = fileMask, IncludeType = includeType };
             var result = CreateSftpTaskInstance().ListDirectoryInternal(_dummyParams, options, new System.Threading.CancellationToken());
 
             Assert.That(result.Select(f => f.LastAccessTimeUtc.ToString(CultureInfo.InvariantCulture)), Is.EquivalentTo(expectedLATs));
+        }
+
+        [TestCase(null, IncludeType.Both, new[] { "11/16/2020 12:00:00", "11/16/2020 13:01:00", "11/16/2020 17:00:11", "11/16/2020 22:00:00", "11/16/2020 23:00:00" })]
+        public void GetDirectoryListLWTs(string fileMask, IncludeType includeType, IEnumerable<string> expectedLWTs)
+        {
+            var options = new Options { FileMask = fileMask, IncludeType = includeType };
+            var result = CreateSftpTaskInstance().ListDirectoryInternal(_dummyParams, options, new System.Threading.CancellationToken());
+
+            Assert.That(result.Select(f => f.LastWriteTime.ToString(CultureInfo.InvariantCulture)), Is.EquivalentTo(expectedLWTs));
+        }
+
+        [TestCase(null, IncludeType.Both, new[] { "12/08/2020 11:00:00", "12/08/2020 12:00:00", "12/08/2020 13:00:00", "12/08/2020 14:00:00", "12/08/2020 15:00:00" })]
+        public void GetDirectoryListLATs(string fileMask, IncludeType includeType, IEnumerable<string> expectedLATs)
+        {
+            var options = new Options { FileMask = fileMask, IncludeType = includeType };
+            var result = CreateSftpTaskInstance().ListDirectoryInternal(_dummyParams, options, new System.Threading.CancellationToken());
+
+            Assert.That(result.Select(f => f.LastAccessTime.ToString(CultureInfo.InvariantCulture)), Is.EquivalentTo(expectedLATs));
         }
 
         [Test]

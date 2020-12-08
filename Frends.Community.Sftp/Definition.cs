@@ -104,6 +104,8 @@ namespace Frends.Community.Sftp
         /// </summary>
         public DateTime LastWriteTimeUtc { get; }
         public DateTime LastAccessTimeUtc { get; }
+        public DateTime LastWriteTime { get; set; }
+        public DateTime LastAccessTime { get; set; }
 
         public FileResult(SftpFile file)
         {
@@ -114,6 +116,8 @@ namespace Frends.Community.Sftp
             this.Name = file.Name;
             this.LastWriteTimeUtc = file.LastWriteTimeUtc;
             this.LastAccessTimeUtc = file.LastAccessTimeUtc;
+            this.LastWriteTime = file.LastWriteTime;
+            this.LastAccessTime = file.LastAccessTime;
         }
     }
 }

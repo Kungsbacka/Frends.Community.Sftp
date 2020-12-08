@@ -54,6 +54,8 @@ Result is a list of objects with following parameters.
 | Name | `string` | Name of directory or file. | `image01.jpg` |
 | LastAccessTimeUtc | `DateTime` | DateTime in UTC for the last time file/directory was accessed. | |
 | LastWriteTimeUtc | `DateTime` | DateTime in UTC for the last time file/directory was written to. | |
+| LastAccessTime | `DateTime` | DateTime for the last time file/directory was accessed. | |
+| LastWriteTime | `DateTime` | DateTime for the last time file/directory was written to. | |
 
 # Building
 
@@ -88,5 +90,5 @@ NOTE: Be sure to merge the latest from "upstream" before making a pull request!
 
 | Version | Changes |
 | ------- | ------- |
-| 1.0.0   | First version |
-| 1.1.0   | LastAccessTimeUTC and LastWriteTimeUTC added to the result objects |
+| 1.0.0   | The initial version. |
+| 1.1.0   | DateTimes added to the result objects. |
