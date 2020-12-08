@@ -24,7 +24,7 @@ namespace Frends.Community.Sftp
         /// </summary>
         DateTime LastWriteTimeUtc { get; }
         DateTime LastAccessTimeUtc { get; }
-        DateTime LastWriteTime { get; set; }
-        DateTime LastAccessTime { get; set; }
+        DateTime LastWriteTime { get; }
+        DateTime LastAccessTime { get; }
     }
 }
