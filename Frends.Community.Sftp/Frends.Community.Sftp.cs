@@ -28,7 +28,7 @@ namespace Frends.Community.Sftp
         /// <param name="input">Connection information.</param>
         /// <param name="options">Optional parameters.</param>
         /// <param name="cancellationToken"></param>
-        /// <returns>List of IFileResult objects.</returns>
+        /// <returns>List [ Object { string FullPath, bool IsDirectory, bool IsFile, long Length, string Name, DateTime LastWriteTimeUtc, DateTime LastAccessTimeUtc, DateTime LastWriteTime, DateTime LastAccessTime } ]</returns>
         public static List<IFileResult> ListDirectory([PropertyTab] Parameters input, [PropertyTab] Options options, CancellationToken cancellationToken)
         {
             return new Sftp().ListDirectoryInternal(input, options, cancellationToken);
