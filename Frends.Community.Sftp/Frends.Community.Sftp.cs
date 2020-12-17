@@ -68,6 +68,21 @@ namespace Frends.Community.Sftp
             if (string.IsNullOrEmpty(options.PrivateKeyFileName))
                 return new PasswordConnectionInfo(input.Server, input.Port, input.UserName, input.Password);
 
+            if (options.UseKeyboardInteractiveAuthenticationMethod)
+            {
+                var keyboardInteractiveAuth = new KeyboardInteractiveAuthenticationMethod(input.UserName);
+                keyboardInteractiveAuth.AuthenticationPrompt += (sender, args) =>
+                {
+                    foreach (var authenticationPrompt in args.Prompts)
+                        authenticationPrompt.Response = input.Password;
+                };
+
+                var privateKeyAuth = new PrivateKeyAuthenticationMethod(input.UserName,
+                                                        new PrivateKeyFile("private key file name"));
+
+                return new ConnectionInfo(input.Server, input.Port, input.UserName, privateKeyAuth, keyboardInteractiveAuth);
+            }
+
             return new PrivateKeyConnectionInfo(input.Server, input.Port, input.UserName, new PrivateKeyFile(options.PrivateKeyFileName, options.Passphrase));
         }
 

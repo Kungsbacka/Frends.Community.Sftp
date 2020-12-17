@@ -82,6 +82,11 @@ namespace Frends.Community.Sftp
         /// </summary>
         [PasswordPropertyText]
         public string Passphrase { get; set; }
+
+        /// <summary>
+        /// If set, it allows you to use keyboard-interactive authentication.
+        /// </summary>
+        public bool UseKeyboardInteractiveAuthenticationMethod { get; set; }
     }
 
     public class FileResult : IFileResult
