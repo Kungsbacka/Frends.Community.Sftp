@@ -66,7 +66,20 @@ namespace Frends.Community.Sftp
         private static ConnectionInfo GetConnectionInfo(Parameters input, Options options)
         {
             if (string.IsNullOrEmpty(options.PrivateKeyFileName))
-                return new PasswordConnectionInfo(input.Server, input.Port, input.UserName, input.Password);
+            {
+                if (!options.UseKeyboardInteractiveAuthenticationMethod)
+                    return new PasswordConnectionInfo(input.Server, input.Port, input.UserName, input.Password);
+
+                var keyboardInteractiveAuth = new KeyboardInteractiveAuthenticationMethod(input.UserName);
+                keyboardInteractiveAuth.AuthenticationPrompt += (sender, args) =>
+                {
+                    foreach (var authenticationPrompt in args.Prompts)
+                        authenticationPrompt.Response = input.Password;
+                };
+
+                return new ConnectionInfo(input.Server, input.Port, input.UserName, keyboardInteractiveAuth);
+            }
+                
 
             if (options.UseKeyboardInteractiveAuthenticationMethod)
             {
@@ -78,7 +91,7 @@ namespace Frends.Community.Sftp
                 };
 
                 var privateKeyAuth = new PrivateKeyAuthenticationMethod(input.UserName,
-                                                        new PrivateKeyFile("private key file name"));
+                                                        new PrivateKeyFile(options.PrivateKeyFileName, options.Passphrase));
 
                 return new ConnectionInfo(input.Server, input.Port, input.UserName, privateKeyAuth, keyboardInteractiveAuth);
             }
