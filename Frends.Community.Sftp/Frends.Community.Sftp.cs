@@ -28,7 +28,7 @@ namespace Frends.Community.Sftp
         /// <param name="input">Connection information.</param>
         /// <param name="options">Optional parameters.</param>
         /// <param name="cancellationToken"></param>
-        /// <returns>List of IFileResult objects.</returns>
+        /// <returns>List [ Object { string FullPath, bool IsDirectory, bool IsFile, long Length, string Name, DateTime LastWriteTimeUtc, DateTime LastAccessTimeUtc, DateTime LastWriteTime, DateTime LastAccessTime } ]</returns>
         public static List<IFileResult> ListDirectory([PropertyTab] Parameters input, [PropertyTab] Options options, CancellationToken cancellationToken)
         {
             return new Sftp().ListDirectoryInternal(input, options, cancellationToken);
@@ -66,7 +66,37 @@ namespace Frends.Community.Sftp
         private static ConnectionInfo GetConnectionInfo(Parameters input, Options options)
         {
             if (string.IsNullOrEmpty(options.PrivateKeyFileName))
-                return new PasswordConnectionInfo(input.Server, input.Port, input.UserName, input.Password);
+            {
+                if (!options.UseKeyboardInteractiveAuthenticationMethod)
+                    return new PasswordConnectionInfo(input.Server, input.Port, input.UserName, input.Password);
+
+                var keyboardInteractiveAuth = new KeyboardInteractiveAuthenticationMethod(input.UserName);
+                keyboardInteractiveAuth.AuthenticationPrompt += (sender, args) =>
+                {
+                    foreach (var authenticationPrompt in args.Prompts)
+                        authenticationPrompt.Response = input.Password;
+                };
+
+                PasswordAuthenticationMethod pauth = new PasswordAuthenticationMethod(input.UserName, input.Password);
+
+                return new ConnectionInfo(input.Server, input.Port, input.UserName, pauth, keyboardInteractiveAuth);
+            }
+                
+
+            if (options.UseKeyboardInteractiveAuthenticationMethod)
+            {
+                var keyboardInteractiveAuth = new KeyboardInteractiveAuthenticationMethod(input.UserName);
+                keyboardInteractiveAuth.AuthenticationPrompt += (sender, args) =>
+                {
+                    foreach (var authenticationPrompt in args.Prompts)
+                        authenticationPrompt.Response = input.Password;
+                };
+
+                var privateKeyAuth = new PrivateKeyAuthenticationMethod(input.UserName,
+                                                        new PrivateKeyFile(options.PrivateKeyFileName, options.Passphrase));
+
+                return new ConnectionInfo(input.Server, input.Port, input.UserName, privateKeyAuth, keyboardInteractiveAuth);
+            }
 
             return new PrivateKeyConnectionInfo(input.Server, input.Port, input.UserName, new PrivateKeyFile(options.PrivateKeyFileName, options.Passphrase));
         }

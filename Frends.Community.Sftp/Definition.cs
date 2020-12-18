@@ -35,7 +35,7 @@ namespace Frends.Community.Sftp
         public int Port { get; set; } = 22;
 
         /// <summary>
-        /// User name
+        /// Username
         /// </summary>
         [DisplayFormat(DataFormatString = "Text")]
         public string UserName { get; set; }
@@ -66,7 +66,7 @@ namespace Frends.Community.Sftp
         public IncludeType IncludeType { get; set; } = IncludeType.File;
 
         /// <summary>
-        /// File mask
+        /// Pattern to match.
         /// </summary>
         [DisplayFormat(DataFormatString = "Text")]
         public string FileMask { get; set; }
@@ -82,6 +82,11 @@ namespace Frends.Community.Sftp
         /// </summary>
         [PasswordPropertyText]
         public string Passphrase { get; set; }
+
+        /// <summary>
+        /// If set, it allows you to use keyboard-interactive authentication.
+        /// </summary>
+        public bool UseKeyboardInteractiveAuthenticationMethod { get; set; }
     }
 
     public class FileResult : IFileResult
