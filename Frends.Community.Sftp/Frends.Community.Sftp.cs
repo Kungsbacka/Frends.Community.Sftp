@@ -77,7 +77,9 @@ namespace Frends.Community.Sftp
                         authenticationPrompt.Response = input.Password;
                 };
 
-                return new ConnectionInfo(input.Server, input.Port, input.UserName, keyboardInteractiveAuth);
+                PasswordAuthenticationMethod pauth = new PasswordAuthenticationMethod(input.UserName, input.Password);
+
+                return new ConnectionInfo(input.Server, input.Port, input.UserName, pauth, keyboardInteractiveAuth);
             }
                 
 
