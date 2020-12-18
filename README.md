@@ -40,6 +40,7 @@ Gets directory and file listing from a SFTP server.
 | FileMask | `string` | File mask, supports wildcards. | `*.jpg` |
 | PrivateKeyFileName | `string` | Full path to private key file. | `C:\private.key` |
 | Delimiter | `Passphrase` | Passphrase for the private key file. | `secret` |
+| UseKeyboardInteractiveAuthenticationMethod | `bool` | Enable keyboard-interactive authentication | `Yes` |
 
 ### Returns
 
@@ -92,3 +93,4 @@ NOTE: Be sure to merge the latest from "upstream" before making a pull request!
 | ------- | ------- |
 | 1.0.0   | The initial version. |
 | 1.1.0   | DateTimes added to the result objects. |
+| 1.2.0   | Added Keyboard-interactive auth |
