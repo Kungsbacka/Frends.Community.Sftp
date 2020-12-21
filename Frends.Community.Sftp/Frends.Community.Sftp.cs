@@ -70,27 +70,31 @@ namespace Frends.Community.Sftp
                 if (!options.UseKeyboardInteractiveAuthenticationMethod)
                     return new PasswordConnectionInfo(input.Server, input.Port, input.UserName, input.Password);
 
-                var keyboardInteractiveAuth = new KeyboardInteractiveAuthenticationMethod(input.UserName);
-                keyboardInteractiveAuth.AuthenticationPrompt += (sender, args) =>
-                {
-                    foreach (var authenticationPrompt in args.Prompts)
-                        authenticationPrompt.Response = input.Password;
-                };
+                var keyboardInteractiveAuth = Sftp.GetKeyboardInteractiveAuthentication(input.UserName, input.Password);
 
                 PasswordAuthenticationMethod pauth = new PasswordAuthenticationMethod(input.UserName, input.Password);
 
                 return new ConnectionInfo(input.Server, input.Port, input.UserName, pauth, keyboardInteractiveAuth);
             }
-                
+
+            if (string.IsNullOrEmpty(options.Passphrase))
+            {
+                if (options.UseKeyboardInteractiveAuthenticationMethod)
+                {
+                    var keyboardInteractiveAuth = Sftp.GetKeyboardInteractiveAuthentication(input.UserName, input.Password);
+
+                    var privateKeyAuth = new PrivateKeyAuthenticationMethod(input.UserName,
+                                                            new PrivateKeyFile(options.PrivateKeyFileName));
+
+                    return new ConnectionInfo(input.Server, input.Port, input.UserName, privateKeyAuth, keyboardInteractiveAuth);
+                }
+
+                return new PrivateKeyConnectionInfo(input.Server, input.Port, input.UserName, new PrivateKeyFile(options.PrivateKeyFileName));
+            }
 
             if (options.UseKeyboardInteractiveAuthenticationMethod)
             {
-                var keyboardInteractiveAuth = new KeyboardInteractiveAuthenticationMethod(input.UserName);
-                keyboardInteractiveAuth.AuthenticationPrompt += (sender, args) =>
-                {
-                    foreach (var authenticationPrompt in args.Prompts)
-                        authenticationPrompt.Response = input.Password;
-                };
+                var keyboardInteractiveAuth = Sftp.GetKeyboardInteractiveAuthentication(input.UserName, input.Password);
 
                 var privateKeyAuth = new PrivateKeyAuthenticationMethod(input.UserName,
                                                         new PrivateKeyFile(options.PrivateKeyFileName, options.Passphrase));
@@ -99,6 +103,18 @@ namespace Frends.Community.Sftp
             }
 
             return new PrivateKeyConnectionInfo(input.Server, input.Port, input.UserName, new PrivateKeyFile(options.PrivateKeyFileName, options.Passphrase));
+        }
+
+        private static KeyboardInteractiveAuthenticationMethod GetKeyboardInteractiveAuthentication(string username, string password)
+        {
+            var keyboardInteractiveAuth = new KeyboardInteractiveAuthenticationMethod(username);
+            keyboardInteractiveAuth.AuthenticationPrompt += (sender, args) =>
+            {
+                foreach (var authenticationPrompt in args.Prompts)
+                    authenticationPrompt.Response = password;
+            };
+
+            return (keyboardInteractiveAuth);
         }
 
         private static string WildCardToRegex(string value)
