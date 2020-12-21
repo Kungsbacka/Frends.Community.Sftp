@@ -20,7 +20,7 @@ https://www.myget.org/F/frends-community/api/v3/index.json and in Gallery view i
 
 ## ListDirectory
 
-Gets directory and file listing from a SFTP server.
+Gets directory and file listing of a SFTP server.
 
 ### Parameters
 
