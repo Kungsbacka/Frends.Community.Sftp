@@ -1,6 +1,6 @@
 # Frends.Community.Sftp
 
-frends Community Task for SFTP
+Frends Community Tasks for Sftp servers.
 
 [![Actions Status](https://github.com/CommunityHiQ/Frends.Community.Sftp/workflows/PackAndPushAfterMerge/badge.svg)](https://github.com/CommunityHiQ/Frends.Community.Sftp/actions) ![MyGet](https://img.shields.io/myget/frends-community/v/Frends.Community.Sftp) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) 
 
@@ -39,6 +39,7 @@ Gets directory and file listing from a SFTP server.
 | IncludeType | `Enum (File, Directory, Both)` | Types to include in the directory listing. | `File` |
 | FileMask | `string` | File mask, supports wildcards. | `*.jpg` |
 | PrivateKeyFileName | `string` | Full path to private key file. | `C:\private.key` |
+| Passphrase | `string` | Passphrase for the private key file. |  |
 | Delimiter | `Passphrase` | Passphrase for the private key file. | `secret` |
 | UseKeyboardInteractiveAuthenticationMethod | `bool` | Enable keyboard-interactive authentication | `Yes` |
 
@@ -94,3 +95,4 @@ NOTE: Be sure to merge the latest from "upstream" before making a pull request!
 | 1.0.0   | The initial version. |
 | 1.1.0   | DateTimes added to the result objects. |
 | 1.2.0   | Added Keyboard-interactive auth |
+| 1.3.0   | All possible auth combinations added (username, password, private key file, passphrase, keyboard interactive) |
