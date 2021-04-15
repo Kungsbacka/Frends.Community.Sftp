@@ -96,3 +96,4 @@ NOTE: Be sure to merge the latest from "upstream" before making a pull request!
 | 1.1.0   | DateTimes added to the result objects. |
 | 1.2.0   | Added Keyboard-interactive auth |
 | 1.3.0   | All possible auth combinations added (username, password, private key file, passphrase, keyboard interactive) |
+| 2.0.0   | Version number update to enable easier update from older sftp package. |
