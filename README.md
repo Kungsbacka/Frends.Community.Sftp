@@ -38,7 +38,7 @@ Gets directory and file listing of a SFTP server.
 | -------- | -------- | -------- | -------- |
 | IncludeType | `Enum (File, Directory, Both)` | Types to include in the directory listing. | `File` |
 | FileMask | `string` | File mask, supports wildcards. | `*.jpg` |
-| PrivateKeyFileName | `string` | Full path to private key file. | `C:\private.key` |
+| PrivateKeyFileName | `string` | Full path to private key file. Supports RSA and DSA private key in both OpenSSH and ssh.com format. | `C:\private.key` |
 | Passphrase | `string` | Passphrase for the private key file. |  |
 | Delimiter | `Passphrase` | Passphrase for the private key file. | `secret` |
 | UseKeyboardInteractiveAuthenticationMethod | `bool` | Enable keyboard-interactive authentication | `Yes` |
