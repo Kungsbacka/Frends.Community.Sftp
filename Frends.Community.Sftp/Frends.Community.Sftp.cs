@@ -50,7 +50,7 @@ namespace Frends.Community.Sftp
 
                     if (options.IncludeType == IncludeType.Both
                         || (file.IsDirectory && options.IncludeType == IncludeType.Directory)
-                        || (file.IsFile && options.IncludeType == IncludeType.File))
+                        || (!file.IsDirectory && options.IncludeType == IncludeType.File))
                     {
                         if (Regex.IsMatch(file.Name, regexStr, RegexOptions.IgnoreCase))
                             result.Add(file);
