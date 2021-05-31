@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using Microsoft.Extensions.DependencyInjection;
@@ -38,6 +39,7 @@ namespace Frends.Community.Sftp
         {
             var result = new List<IFileResult>();
             var connectionInfo = GetConnectionInfo(input, options);
+            connectionInfo.Encoding = Encoding.GetEncoding((int)options.Encoding);
             var regexStr = string.IsNullOrEmpty(options.FileMask) ? string.Empty : WildCardToRegex(options.FileMask);
 
             var sftp = _sftpService.Value;

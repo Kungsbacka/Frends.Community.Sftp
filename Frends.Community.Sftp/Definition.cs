@@ -18,6 +18,17 @@ namespace Frends.Community.Sftp
     }
 
     /// <summary>
+    /// Enumeration to specify the encoding used to convert binary data to strings.
+    /// Dotnet Core only supports a few encodings, and this enum contains the most relevant ones.
+    /// </summary>
+    public enum TransferEncoding
+    {
+        UTF8 = 65001,
+        ASCII = 20127,
+        ISO88591 = 28591
+    }
+
+    /// <summary>
     /// Parameters class usually contains parameters that are required.
     /// </summary>
     public class Parameters
@@ -87,6 +98,12 @@ namespace Frends.Community.Sftp
         /// If set, it allows you to use keyboard-interactive authentication.
         /// </summary>
         public bool UseKeyboardInteractiveAuthenticationMethod { get; set; }
+
+        /// <summary>
+        /// Encoding used when converting binary data to strings.
+        /// </summary>
+        [DefaultValue(TransferEncoding.UTF8)]
+        public TransferEncoding Encoding { get; set; } = TransferEncoding.UTF8;
     }
 
     public class FileResult : IFileResult
